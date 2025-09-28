@@ -1,0 +1,88 @@
+# WordPress Plugin - Google Drive Hierarchy Navigator
+# Gitignore para manter apenas os ficheiros essenciais no repositório
+
+# === FICHEIROS GERADOS ===
+# ZIP do plugin gerado
+*.zip
+gdrive-hierarchy-navigator.zip
+
+# === FICHEIROS DE DESENVOLVIMENTO/TESTE ===
+# API keys e configurações sensíveis
+api.txt
+*.key
+*.secret
+
+# Ficheiros de teste e debug específicos
+teste-*.php
+teste-*.html
+diagnostico*.php
+verificacao-*.md
+verificar-*.php
+ativar-plugin.php
+criar-assets.php
+example.php
+
+# === SCRIPTS DE BUILD ===
+# Scripts específicos do ambiente de desenvolvimento
+gerar-zip.ps1
+zip.cmd
+criar-zip-plugin.sh
+
+# === DOCUMENTAÇÃO DE DESENVOLVIMENTO ===
+# Documentação específica para setup local
+GITHUB-SETUP.md
+SCRIPTS-README.md
+
+# === LOGS E FICHEIROS TEMPORÁRIOS ===
+# Logs de debug
+*.log
+debug.txt
+wp-content/uploads/gdhn-debug.log
+
+# Ficheiros temporários
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# === EDITOR/IDE ===
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PhpStorm
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# === SISTEMA OPERATIVO ===
+# Windows
+desktop.ini
+ehthumbs.db
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# === NODE.JS (se usado) ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === PHP ===
+# Composer (se usado)
+vendor/
+composer.lock
+
+# === BACKUPS ===
+*.bak
+*.backup
+*.old
+*_backup.*

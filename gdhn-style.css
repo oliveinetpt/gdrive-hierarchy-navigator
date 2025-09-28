@@ -1,0 +1,641 @@
+/**
+ * Google Drive Hierarchy Navigator - Estilos CSS
+ * Versão: 1.9.0
+ */
+
+/* === VARIÁVEIS CSS === */
+:root {
+    --gdhn-primary: #4285f4;
+    --gdhn-primary-hover: #3367d6;
+    --gdhn-secondary: #34a853;
+    --gdhn-danger: #ea4335;
+    --gdhn-warning: #fbbc04;
+    --gdhn-gray-50: #f8f9fa;
+    --gdhn-gray-100: #f1f3f4;
+    --gdhn-gray-200: #e8eaed;
+    --gdhn-gray-300: #dadce0;
+    --gdhn-gray-400: #bdc1c6;
+    --gdhn-gray-500: #9aa0a6;
+    --gdhn-gray-600: #80868b;
+    --gdhn-gray-700: #5f6368;
+    --gdhn-gray-800: #3c4043;
+    --gdhn-gray-900: #202124;
+    --gdhn-border-radius: 8px;
+    --gdhn-shadow-light: 0 1px 3px rgba(0,0,0,0.1);
+    --gdhn-shadow-medium: 0 4px 6px rgba(0,0,0,0.1);
+    --gdhn-transition: all 0.2s ease;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.gdhn-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--gdhn-gray-800);
+    background: #fff;
+    border: 1px solid var(--gdhn-gray-200);
+    border-radius: var(--gdhn-border-radius);
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: var(--gdhn-shadow-light);
+}
+
+/* === LOADING === */
+.gdhn-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gdhn-gray-600);
+}
+
+.gdhn-spinner {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--gdhn-gray-200);
+    border-radius: 50%;
+    border-top-color: var(--gdhn-primary);
+    animation: gdhn-spin 1s ease-in-out infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes gdhn-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* === BARRAS DE NAVEGAÇÃO === */
+.gdhn-navigation-bars {
+    margin-bottom: 20px;
+}
+
+.gdhn-nav-level {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: var(--gdhn-border-radius);
+    transition: var(--gdhn-transition);
+}
+
+/* Estilo específico para o primeiro nível */
+.gdhn-nav-level[data-level="0"] {
+    background: linear-gradient(135deg, rgba(66, 133, 244, 0.1) 0%, rgba(51, 103, 214, 0.15) 100%);
+    border: 2px solid rgba(66, 133, 244, 0.2);
+    box-shadow: 0 2px 8px rgba(66, 133, 244, 0.1);
+}
+
+.gdhn-nav-level[data-level="0"] .gdhn-nav-chips {
+    justify-content: center;
+}
+
+/* Estilo específico para o segundo nível */
+.gdhn-nav-level[data-level="1"] {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.gdhn-nav-level:last-child {
+    margin-bottom: 0;
+}
+
+.gdhn-nav-level-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gdhn-gray-700);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gdhn-nav-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gdhn-nav-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--gdhn-gray-50);
+    border: 1px solid var(--gdhn-gray-300);
+    border-radius: 20px;
+    color: var(--gdhn-gray-700);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: var(--gdhn-transition);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* Chips do primeiro nível (Anos Letivos) */
+.gdhn-nav-level[data-level="0"] .gdhn-nav-chip {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--gdhn-gray-800);
+    font-weight: 600;
+    padding: 12px 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gdhn-nav-level[data-level="0"] .gdhn-nav-chip:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.gdhn-nav-level[data-level="0"] .gdhn-nav-chip.active {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--gdhn-gray-800);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+}
+
+/* Chips do segundo nível (Categorias) */
+.gdhn-nav-level[data-level="1"] .gdhn-nav-chip {
+    background: #ffffff;
+    border: 2px solid #e8eaed;
+    color: var(--gdhn-gray-800);
+    font-weight: 500;
+}
+
+.gdhn-nav-chip:hover {
+    background: var(--gdhn-primary);
+    color: white;
+    border-color: var(--gdhn-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--gdhn-shadow-medium);
+}
+
+.gdhn-nav-chip.active {
+    background: var(--gdhn-primary);
+    color: white;
+    border-color: var(--gdhn-primary);
+    box-shadow: var(--gdhn-shadow-medium);
+}
+
+/* Estados específicos para segundo nível */
+.gdhn-nav-level[data-level="1"] .gdhn-nav-chip:hover {
+    background: var(--gdhn-primary);
+    color: white;
+    border-color: var(--gdhn-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+}
+
+.gdhn-nav-level[data-level="1"] .gdhn-nav-chip.active {
+    background: var(--gdhn-primary);
+    color: white;
+    border-color: var(--gdhn-primary);
+    box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+}
+
+.gdhn-nav-chip .gdhn-chip-icon {
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+/* === FILTRO === */
+.gdhn-filter-section {
+    margin-bottom: 20px;
+}
+
+.gdhn-filter-container {
+    position: relative;
+    max-width: 400px;
+}
+
+.gdhn-filter-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--gdhn-gray-300);
+    border-radius: var(--gdhn-border-radius);
+    font-size: 14px;
+    background: var(--gdhn-gray-50);
+    transition: var(--gdhn-transition);
+    box-sizing: border-box;
+}
+
+.gdhn-filter-input:focus {
+    outline: none;
+    border-color: var(--gdhn-primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+/* Ícone de filtro removido */
+
+/* === TABELA DE ARQUIVOS === */
+.gdhn-files-section {
+    margin-top: 20px;
+}
+
+.gdhn-files-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--gdhn-border-radius);
+    overflow: hidden;
+    box-shadow: var(--gdhn-shadow-light);
+}
+
+.gdhn-files-table thead {
+    background: var(--gdhn-gray-50);
+}
+
+.gdhn-files-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--gdhn-gray-700);
+    border-bottom: 1px solid var(--gdhn-gray-200);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gdhn-files-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gdhn-gray-100);
+    vertical-align: middle;
+}
+
+.gdhn-files-table tbody tr {
+    transition: var(--gdhn-transition);
+}
+
+.gdhn-files-table tbody tr:hover {
+    background: var(--gdhn-gray-50);
+}
+
+.gdhn-files-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Colunas específicas */
+.gdhn-icon-col {
+    width: 40px;
+    text-align: center;
+}
+
+.gdhn-name-col {
+    min-width: 200px;
+}
+
+.gdhn-date-col {
+    width: 140px;
+    color: var(--gdhn-gray-600);
+    font-size: 13px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.gdhn-size-col {
+    width: 100px;
+    color: var(--gdhn-gray-600);
+    font-size: 13px;
+    text-align: right;
+    font-weight: 500;
+}
+
+.gdhn-actions-col {
+    width: 120px;
+    text-align: right;
+}
+
+/* Links dos nomes dos ficheiros */
+.gdhn-file-name {
+    color: var(--gdhn-gray-800) !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--gdhn-transition);
+}
+
+.gdhn-file-name:hover {
+    color: var(--gdhn-primary) !important;
+    text-decoration: none;
+}
+
+/* === ÍCONES DE ARQUIVOS === */
+.gdhn-file-icon {
+    font-size: 18px;
+    display: inline-block;
+}
+
+.gdhn-file-name {
+    font-weight: 500;
+    color: var(--gdhn-gray-800);
+    text-decoration: none;
+    transition: var(--gdhn-transition);
+}
+
+.gdhn-file-name:hover {
+    color: var(--gdhn-primary);
+}
+
+/* === BOTÕES DE AÇÃO === */
+.gdhn-action-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+}
+
+.gdhn-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border: 1px solid var(--gdhn-gray-300);
+    border-radius: var(--gdhn-border-radius);
+    background: white;
+    color: var(--gdhn-gray-700);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    transition: var(--gdhn-transition);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.gdhn-btn:hover {
+    border-color: var(--gdhn-primary);
+    color: var(--gdhn-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--gdhn-shadow-light);
+}
+
+.gdhn-btn-primary {
+    background: var(--gdhn-primary);
+    color: white;
+    border-color: var(--gdhn-primary);
+}
+
+.gdhn-btn-primary:hover {
+    background: var(--gdhn-primary-hover);
+    border-color: var(--gdhn-primary-hover);
+    color: white;
+}
+
+.gdhn-btn-success {
+    background: var(--gdhn-secondary);
+    color: white;
+    border-color: var(--gdhn-secondary);
+}
+
+/* === BOTÕES APENAS COM ÍCONES === */
+.gdhn-btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--gdhn-gray-300);
+    border-radius: 50%;
+    background: white;
+    color: var(--gdhn-gray-600);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--gdhn-transition);
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.gdhn-btn-icon:hover {
+    background: var(--gdhn-primary);
+    color: white;
+    border-color: var(--gdhn-primary);
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+}
+
+.gdhn-btn-view:hover {
+    background: #1976d2;
+    border-color: #1976d2;
+}
+
+.gdhn-btn-download:hover {
+    background: var(--gdhn-secondary);
+    border-color: var(--gdhn-secondary);
+}
+
+.gdhn-btn-success:hover {
+    background: #2d8f47;
+    border-color: #2d8f47;
+    color: white;
+}
+
+.gdhn-btn .gdhn-btn-icon {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+/* === MENSAGENS === */
+.gdhn-no-files {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gdhn-gray-600);
+}
+
+.gdhn-no-files p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.gdhn-error {
+    background: #fef7f7;
+    color: var(--gdhn-danger);
+    padding: 12px 16px;
+    border: 1px solid #fecaca;
+    border-radius: var(--gdhn-border-radius);
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.gdhn-error-section {
+    margin-top: 20px;
+}
+
+.gdhn-error-message {
+    background: #fef7f7;
+    color: var(--gdhn-danger);
+    padding: 16px;
+    border: 1px solid #fecaca;
+    border-radius: var(--gdhn-border-radius);
+    font-weight: 500;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .gdhn-container {
+        padding: 16px;
+        margin: 16px 0;
+    }
+    
+    .gdhn-nav-chips {
+        gap: 6px;
+    }
+    
+    .gdhn-nav-chip {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .gdhn-filter-container {
+        max-width: 100%;
+    }
+    
+    .gdhn-files-table {
+        font-size: 13px;
+    }
+    
+    .gdhn-files-table th,
+    .gdhn-files-table td {
+        padding: 8px 12px;
+    }
+    
+    .gdhn-date-col,
+    .gdhn-size-col {
+        display: none;
+    }
+    
+    .gdhn-action-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .gdhn-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gdhn-container {
+        padding: 12px;
+    }
+    
+    .gdhn-nav-chip {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    .gdhn-files-table th,
+    .gdhn-files-table td {
+        padding: 6px 8px;
+    }
+    
+    .gdhn-icon-col {
+        width: 30px;
+    }
+    
+    .gdhn-actions-col {
+        width: 80px;
+    }
+}
+
+/* === ANIMAÇÕES ADICIONAIS === */
+@keyframes gdhn-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gdhn-fade-in {
+    animation: gdhn-fadeIn 0.3s ease-out;
+}
+
+/* === ESTADOS DE CARREGAMENTO === */
+.gdhn-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--gdhn-border-radius);
+    z-index: 10;
+}
+
+.gdhn-container {
+    position: relative;
+}
+
+/* === MELHORIAS DE ACESSIBILIDADE === */
+.gdhn-nav-chip:focus,
+.gdhn-btn:focus,
+.gdhn-filter-input:focus {
+    outline: 2px solid var(--gdhn-primary);
+    outline-offset: 2px;
+}
+
+.gdhn-nav-chip:focus:not(:focus-visible),
+.gdhn-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* === ÍCONES FALLBACK === */
+.gdhn-icon-fallback {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    font-style: normal;
+}
+
+/* Fallbacks para quando Font Awesome não carrega */
+.fa-folder:before { content: "📁"; }
+.fa-search:before { content: "🔍"; }
+.fa-file-pdf:before { content: "📄"; }
+.fa-file-word:before { content: "📝"; }
+.fa-file-excel:before { content: "📊"; }
+.fa-file-powerpoint:before { content: "📋"; }
+.fa-file-alt:before { content: "📃"; }
+.fa-file-image:before { content: "🖼️"; }
+.fa-file-video:before { content: "🎬"; }
+.fa-file-audio:before { content: "🎵"; }
+.fa-file-archive:before { content: "📦"; }
+.fa-file:before { content: "📎"; }
+.fa-eye:before { content: "👁️"; }
+.fa-download:before { content: "⬇️"; }
+
+/* Se Font Awesome carregou, esconder fallbacks */
+.fa:before, .fas:before, .far:before, .fal:before, .fab:before {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 5 Free", "Font Awesome 5 Pro" !important;
+}
+
+/* === DARK MODE SUPPORT === */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --gdhn-gray-50: #303134;
+        --gdhn-gray-100: #3c4043;
+        --gdhn-gray-200: #5f6368;
+        --gdhn-gray-300: #80868b;
+        --gdhn-gray-400: #9aa0a6;
+        --gdhn-gray-500: #bdc1c6;
+        --gdhn-gray-600: #dadce0;
+        --gdhn-gray-700: #e8eaed;
+        --gdhn-gray-800: #f1f3f4;
+        --gdhn-gray-900: #f8f9fa;
+    }
+    
+    .gdhn-container {
+        background: var(--gdhn-gray-100);
+        border-color: var(--gdhn-gray-200);
+        color: var(--gdhn-gray-800);
+    }
+    
+    .gdhn-files-table {
+        background: var(--gdhn-gray-100);
+    }
+}
