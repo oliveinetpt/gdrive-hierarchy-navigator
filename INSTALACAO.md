@@ -178,6 +178,7 @@ Adicione em qualquer página ou post:
     api_key="SUA_KEY"
     levels="3"                    # Ano > Disciplina > Tipo
     show_date="true"              # Mostrar datas
+    show_size="true"              # Mostrar tamanhos
     show_download="true"          # Permitir downloads
     cache_minutes="30"            # Cache longo para estabilidade
     max_files="200"               # Muitos arquivos por pasta
@@ -192,6 +193,7 @@ Adicione em qualquer página ou post:
     api_key="SUA_KEY"
     levels="2"                    # Departamento > Categoria
     show_date="true"              # Importante para documentos
+    show_size="true"              # Mostrar tamanhos
     show_download="false"         # Apenas visualização
     show_view="true"              # Abrir no Google Drive
     cache_minutes="15"            # Cache mais frequente

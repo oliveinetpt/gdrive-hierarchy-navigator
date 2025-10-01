@@ -27,6 +27,7 @@ example.php
 gerar-zip.ps1
 zip.cmd
 criar-zip-plugin.sh
+criar_release.ps1
 
 # === DOCUMENTAÇÃO DE DESENVOLVIMENTO ===
 # Documentação específica para setup local

@@ -23,10 +23,14 @@
     api_key="AIzaSyBhbIRjQZZU0YL7GcJKJQnRe34lJgHRgVM"
     levels="3"
     show_date="true"
+    show_size="true"
+    show_hits="true"
     show_download="true"
     show_view="true"
     cache_minutes="20"
     max_files="150"
+    primary_color="#4285f4"
+    secondary_color="#34a853"
     filter_placeholder="Procurar documentos escolares..."]
 
 <!-- EXEMPLO 3: Apenas Visualização (sem download) -->
@@ -45,7 +49,35 @@
     api_key="AIzaSyBhbIRjQZZU0YL7GcJKJQnRe34lJgHRgVM"
     levels="1"
     show_date="false"
-    max_files="50"]
+    max_files="50"
+    filter_placeholder="Buscar..."]
+
+<!-- EXEMPLO 5: Com Sistema de Estatísticas Completo -->
+[gdrive_navigator 
+    folder_id="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms" 
+    api_key="AIzaSyBhbIRjQZZU0YL7GcJKJQnRe34lJgHRgVM"
+    levels="2"
+    show_date="true"
+    show_size="true"
+    show_hits="true"
+    show_download="true"
+    show_view="true"
+    cache_minutes="15"
+    max_files="100"
+    primary_color="#4285f4"
+    filter_placeholder="Procurar documentos..."]
+
+<!-- EXEMPLO 6: Sem Contador de Visualizações (Privacidade) -->
+[gdrive_navigator 
+    folder_id="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms" 
+    api_key="AIzaSyBhbIRjQZZU0YL7GcJKJQnRe34lJgHRgVM"
+    levels="2"
+    show_date="true"
+    show_size="true"
+    show_hits="false"
+    show_download="true"
+    show_view="true"
+    filter_placeholder="Documentos confidenciais..."]
 
 <?php
 /*
@@ -69,6 +101,25 @@ ESTRUTURA DE PASTAS RECOMENDADA:
   └── 📁 Recursos Gerais (Nível 1)
       ├── 📁 Modelos (Nível 2)
       └── 📁 Formulários (Nível 2)
+
+SISTEMA DE ESTATÍSTICAS (NOVA FUNCIONALIDADE v2.1.0):
+
+📊 CONTADOR AUTOMÁTICO:
+   - Cada clique num arquivo é registado automaticamente
+   - Badges coloridos mostram número de hits em tempo real
+   - Dados armazenados permanentemente na base de dados
+
+📈 PÁGINA DE ESTATÍSTICAS ADMIN:
+   - Acesse: Ferramentas > GDrive Stats
+   - Estatísticas gerais (total arquivos, hits, médias)
+   - Top 10 arquivos mais visualizados
+   - Top 10 pastas mais ativas
+   - Atividade recente (últimos 7 dias)
+
+🔒 CONTROLO DE PRIVACIDADE:
+   - Use show_hits="false" para ocultar contadores
+   - Ideal para documentos confidenciais
+   - Dados continuam a ser registados (apenas ocultos na interface)
 
 CONFIGURAÇÃO PARA DIFERENTES CASOS:
 
