@@ -1,6 +1,6 @@
-/**
+﻿/**
  * Google Drive Hierarchy Navigator - JavaScript Principal
- * Versão: 2.5.0
+ * VersÃ£o: 2.5.0
  */
 
 (function($) {
@@ -20,7 +20,7 @@
             this.init();
         }
         
-        // Obter configuração do container
+        // Obter configuraÃ§Ã£o do container
         getConfig() {
             const container = this.container;
             
@@ -102,7 +102,7 @@
             document.getElementById('gdhn-custom-css').textContent += customCSS;
         }
         
-        // Função auxiliar para clarear/escurecer cores
+        // FunÃ§Ã£o auxiliar para clarear/escurecer cores
         lightenColor(color, percent) {
             const num = parseInt(color.replace("#",""),16);
             const amt = Math.round(2.55 * percent);
@@ -114,7 +114,7 @@
                 (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
         }
         
-        // Função auxiliar para converter hex para rgba
+        // FunÃ§Ã£o auxiliar para converter hex para rgba
         hexToRgba(hex, alpha) {
             const r = parseInt(hex.slice(1, 3), 16);
             const g = parseInt(hex.slice(3, 5), 16);
@@ -129,7 +129,7 @@
                 this.filterFiles($(e.target).val());
             });
             
-            // Navegação por chips
+            // NavegaÃ§Ã£o por chips
             this.container.on('click', '.gdhn-nav-chip', (e) => {
                 e.preventDefault();
                 const level = parseInt($(e.target).data('level'));
@@ -139,20 +139,20 @@
                 this.navigateToFolder(level, folderId, folderName);
             });
             
-            // Botão admin para abrir Google Drive
+            // BotÃ£o admin para abrir Google Drive
             this.container.on('click', '.gdhn-admin-drive-btn', (e) => {
                 e.preventDefault();
                 this.openGoogleDriveAdmin();
             });
             
-            // Botões de ação dos arquivos
+            // BotÃµes de aÃ§Ã£o dos arquivos
             this.container.on('click', '.gdhn-btn-view', (e) => {
                 e.preventDefault();
-                // Garantir que pegamos o link mesmo se clicarem no ícone
+                // Garantir que pegamos o link mesmo se clicarem no Ã­cone
                 const $target = $(e.target).closest('.gdhn-btn-view');
                 const url = $target.attr('href');
                 
-                // Registrar hit quando botão "View" é clicado
+                // Registrar hit quando botÃ£o "View" Ã© clicado
                 const $row = $target.closest('tr');
                 const fileName = $row.find('.gdhn-file-name').text().trim();
                 const $hitsElement = $row.find('.gdhn-hits-count');
@@ -160,7 +160,7 @@
                 if ($hitsElement.length) {
                     const fileId = $hitsElement.data('file-id');
                     if (fileId) {
-                        // Registrar hit de forma assíncrona
+                        // Registrar hit de forma assÃ­ncrona
                         this.trackFileHit(fileId, fileName, this.config.folderId);
                     }
                 }
@@ -169,7 +169,7 @@
             });
             
             this.container.on('click', '.gdhn-btn-download', (e) => {
-                // Registrar hit quando botão "Download" é clicado
+                // Registrar hit quando botÃ£o "Download" Ã© clicado
                 const $target = $(e.target).closest('.gdhn-btn-download');
                 const $row = $target.closest('tr');
                 const fileName = $row.find('.gdhn-file-name').text().trim();
@@ -178,58 +178,48 @@
                 if ($hitsElement.length) {
                     const fileId = $hitsElement.data('file-id');
                     if (fileId) {
-                        // Registrar hit de forma assíncrona
+                        // Registrar hit de forma assÃ­ncrona
                         this.trackFileHit(fileId, fileName, this.config.folderId);
                     }
                 }
                 
-                // Download direto - deixar comportamento padrão
+                // Download direto - deixar comportamento padrÃ£o
             });
             
             // Tracking de hits nos nomes dos arquivos
             this.container.on('click', '.gdhn-file-name', (e) => {
-                console.log('GDHN: Clique no nome do arquivo detectado');
                 
-                // Registrar hit quando arquivo é clicado
+                // Registrar hit quando arquivo Ã© clicado
                 const $link = $(e.target).closest('.gdhn-file-name');
                 const $row = $link.closest('tr');
                 const fileName = $link.text().trim();
                 const $hitsElement = $row.find('.gdhn-hits-count');
                 
-                console.log('GDHN: Elementos encontrados:', {
-                    fileName: fileName,
-                    hitsElementExists: $hitsElement.length > 0,
-                    fileId: $hitsElement.data('file-id')
-                });
-                
                 if ($hitsElement.length) {
                     const fileId = $hitsElement.data('file-id');
                     if (fileId) {
-                        console.log('GDHN: Registando hit para arquivo:', fileId);
-                        // Registrar hit de forma assíncrona
+                        // Registrar hit de forma assÃ­ncrona
                         this.trackFileHit(fileId, fileName, this.config.folderId);
                     } else {
-                        console.warn('GDHN: File ID não encontrado');
                     }
                 } else {
-                    console.warn('GDHN: Elemento de hits não encontrado');
                 }
                 
-                // Permitir comportamento padrão (abrir link)
+                // Permitir comportamento padrÃ£o (abrir link)
             });
         }
         
-        // Carregar pastas iniciais (nível 1)
+        // Carregar pastas iniciais (nÃ­vel 1)
         async loadInitialFolders() {
             try {
                 
-                // Verificar configuração básica
+                // Verificar configuraÃ§Ã£o bÃ¡sica
                 if (!this.config.folderId || !this.config.apiKey) {
-                    throw new Error('Configuração inválida: falta folder_id ou api_key');
+                    throw new Error('ConfiguraÃ§Ã£o invÃ¡lida: falta folder_id ou api_key');
                 }
                 
                 if (!gdhn_ajax || !gdhn_ajax.ajax_url) {
-                    throw new Error('AJAX não configurado corretamente');
+                    throw new Error('AJAX nÃ£o configurado corretamente');
                 }
                 
                 this.showLoading();
@@ -318,11 +308,11 @@
             });
         }
         
-        // Renderizar nível de navegação
+        // Renderizar nÃ­vel de navegaÃ§Ã£o
         renderNavigationLevel(level, folders) {
             const navBars = this.container.find('.gdhn-navigation-bars');
             
-            // Remover níveis subsequentes se existirem
+            // Remover nÃ­veis subsequentes se existirem
             navBars.find(`.gdhn-nav-level[data-level="${level}"]`).nextAll().remove();
             navBars.find(`.gdhn-nav-level[data-level="${level}"]`).remove();
             
@@ -374,13 +364,13 @@
                 this.currentPath = this.currentPath.slice(0, level + 1);
                 this.currentPath[level] = { id: folderId, name: folderName };
                 
-                // Se não é o último nível configurado, carregar subpastas
+                // Se nÃ£o Ã© o Ãºltimo nÃ­vel configurado, carregar subpastas
                 if (level < this.config.levels - 1) {
                     const subfolders = await this.getFolders(folderId);
                     this.renderNavigationLevel(level + 1, subfolders);
                     this.hideFilesSection();
                 } else {
-                    // É o último nível, carregar arquivos
+                    // Ã‰ o Ãºltimo nÃ­vel, carregar arquivos
                     const files = await this.getFiles(folderId);
                     this.renderFiles(files);
                     this.showFilesSection();
@@ -395,7 +385,7 @@
         
         // Atualizar chip ativo
         updateActiveChip(level, folderId) {
-            // Remover estado ativo de todos os chips do mesmo nível
+            // Remover estado ativo de todos os chips do mesmo nÃ­vel
             this.container.find(`.gdhn-nav-chip[data-level="${level}"]`).removeClass('active');
             
             // Adicionar estado ativo ao chip selecionado
@@ -438,10 +428,10 @@
             
             const actionsHtml = this.createActionButtons(file);
             
-            // URLs de fallback caso não venham do backend
+            // URLs de fallback caso nÃ£o venham do backend
             const viewUrl = file.view_url || (file.id ? `https://drive.google.com/file/d/${file.id}/view` : '#');
             
-            // Verificação mais robusta dos dados formatados
+            // VerificaÃ§Ã£o mais robusta dos dados formatados
             const dateValue = file.formatted_date || file.modifiedTime || '';
             const sizeValue = file.formatted_size || (file.size ? this.formatFileSize(file.size) : '');
             
@@ -489,15 +479,15 @@
             return $row;
         }
         
-        // Criar botões de ação para um arquivo
+        // Criar botÃµes de aÃ§Ã£o para um arquivo
         createActionButtons(file) {
             let buttons = '';
 
-            // URLs de fallback caso não venham do backend
+            // URLs de fallback caso nÃ£o venham do backend
             const viewUrl = file.view_url || (file.id ? `https://drive.google.com/file/d/${file.id}/view` : null);
             const downloadUrl = file.download_url || (file.id ? `https://drive.google.com/uc?export=download&id=${file.id}` : null);
 
-            // Botão Ver
+            // BotÃ£o Ver
             if (this.config.showView && viewUrl) {
                 buttons += `
                     <a href="${viewUrl}"
@@ -510,7 +500,7 @@
                 `;
             }
 
-            // Botão Download
+            // BotÃ£o Download
             if (this.config.showDownload && downloadUrl) {
                 buttons += `
                     <a href="${downloadUrl}"
@@ -555,34 +545,28 @@
         
         // Carregar hits dos arquivos
         async loadFileHits() {
-            console.log('GDHN: loadFileHits chamado, showHits:', this.config.showHits);
             
             if (!this.config.showHits) {
-                console.log('GDHN: showHits desativado, não carregando hits');
                 return;
             }
             
             const fileElements = this.container.find('.gdhn-hits-count');
-            console.log('GDHN: Elementos de hits encontrados:', fileElements.length);
             
             fileElements.each((index, element) => {
                 const $element = $(element);
                 const fileId = $element.data('file-id');
                 
-                console.log('GDHN: Processando elemento', index, 'fileId:', fileId);
                 
                 if (fileId) {
                     this.getFileHits(fileId).then(hits => {
-                        console.log('GDHN: Hits obtidos para', fileId, ':', hits);
                         $element.text(hits);
                     });
                 } else {
-                    console.warn('GDHN: File ID não encontrado no elemento', index);
                 }
             });
         }
         
-        // Obter hits de um arquivo específico
+        // Obter hits de um arquivo especÃ­fico
         async getFileHits(fileId) {
             try {
                 const response = await $.ajax({
@@ -600,17 +584,16 @@
                 }
                 return 0;
             } catch (error) {
-                console.warn('GDHN: Erro ao obter hits:', error);
                 return 0;
             }
         }
         
         // Obter nome da pasta atual
         getCurrentFolderName() {
-            // Procurar pelo chip ativo do último nível
+            // Procurar pelo chip ativo do Ãºltimo nÃ­vel
             const activeChips = this.container.find('.gdhn-nav-chip.active');
             if (activeChips.length > 0) {
-                // Pegar o último chip ativo (nível mais profundo)
+                // Pegar o Ãºltimo chip ativo (nÃ­vel mais profundo)
                 const lastActiveChip = activeChips.last();
                 const folderName = lastActiveChip.text().trim();
                 if (folderName) {
@@ -618,7 +601,7 @@
                 }
             }
             
-            // Se não houver chip ativo, tentar buscar o nome da pasta atual do cache
+            // Se nÃ£o houver chip ativo, tentar buscar o nome da pasta atual do cache
             const currentFolderId = this.getCurrentFolderId();
             if (currentFolderId && this.cache && this.cache[currentFolderId]) {
                 const cachedData = this.cache[currentFolderId];
@@ -628,7 +611,7 @@
                 }
             }
             
-            // Último recurso: buscar no currentPath
+            // Ãšltimo recurso: buscar no currentPath
             if (this.currentPath.length > 0) {
                 const currentFolder = this.currentPath[this.currentPath.length - 1];
                 if (currentFolder && currentFolder.name) {
@@ -639,12 +622,12 @@
             return null;
         }
         
-        // Obter ID da pasta atual (onde o ficheiro está)
+        // Obter ID da pasta atual (onde o ficheiro estÃ¡)
         getCurrentFolderId() {
-            // Procurar pelo chip ativo do último nível
+            // Procurar pelo chip ativo do Ãºltimo nÃ­vel
             const activeChips = this.container.find('.gdhn-nav-chip.active');
             if (activeChips.length > 0) {
-                // Pegar o último chip ativo (nível mais profundo)
+                // Pegar o Ãºltimo chip ativo (nÃ­vel mais profundo)
                 const lastActiveChip = activeChips.last();
                 return lastActiveChip.data('folder-id');
             }
@@ -653,28 +636,15 @@
 
         // Registrar hit de um arquivo
         async trackFileHit(fileId, fileName, originalFolderId) {
-            // Obter informações da pasta atual
+            // Obter informaÃ§Ãµes da pasta atual
             const currentFolderId = this.getCurrentFolderId();
             const currentFolderName = this.getCurrentFolderName();
             
-            console.log('GDHN: trackFileHit chamado:', {
-                fileId: fileId,
-                fileName: fileName,
-                originalFolderId: originalFolderId,
-                currentFolderId: currentFolderId,
-                currentFolderName: currentFolderName,
-                showHits: this.config.showHits,
-                pageUrl: window.location.href,
-                pageTitle: document.title
-            });
-            
             if (!this.config.showHits || !fileId) {
-                console.warn('GDHN: Tracking cancelado - showHits:', this.config.showHits, 'fileId:', fileId);
                 return;
             }
             
             try {
-                console.log('GDHN: Enviando requisição AJAX para tracking...');
                 const response = await $.ajax({
                     url: gdhn_ajax.ajax_url,
                     type: 'POST',
@@ -691,14 +661,11 @@
                 });
                 
                 if (response.success) {
-                    console.log('GDHN: Hit registado com sucesso:', response.data.hits);
                     // Atualizar contador na interface
                     const $counter = this.container.find(`.gdhn-hits-count[data-file-id="${fileId}"]`);
                     if ($counter.length) {
                         $counter.text(response.data.hits);
-                        console.log('GDHN: Contador atualizado na interface');
                     } else {
-                        console.warn('GDHN: Contador não encontrado na interface');
                     }
                     return response.data.hits;
                 } else {
@@ -717,17 +684,16 @@
                 const driveUrl = `https://drive.google.com/drive/folders/${this.config.folderId}`;
                 window.open(driveUrl, '_blank', 'noopener,noreferrer');
             } else {
-                console.warn('GDHN: Folder ID não configurado para botão admin');
             }
         }
         
-        // Mostrar seção de arquivos
+        // Mostrar seÃ§Ã£o de arquivos
         showFilesSection() {
             this.container.find('.gdhn-filter-section').show();
             this.container.find('.gdhn-files-section').show();
         }
         
-        // Esconder seção de arquivos
+        // Esconder seÃ§Ã£o de arquivos
         hideFilesSection() {
             this.container.find('.gdhn-filter-section').hide();
             this.container.find('.gdhn-files-section').hide();
@@ -746,12 +712,12 @@
             this.container.find('.gdhn-navigation-bars').show();
         }
         
-        // Mostrar overlay de loading (apenas na seção de arquivos)
+        // Mostrar overlay de loading (apenas na seÃ§Ã£o de arquivos)
         showLoadingOverlay() {
             if (this.isLoading) return;
             this.isLoading = true;
             
-            // Aplicar overlay apenas na seção de arquivos, não em todo o container
+            // Aplicar overlay apenas na seÃ§Ã£o de arquivos, nÃ£o em todo o container
             const filesSection = this.container.find('.gdhn-files-section');
             if (filesSection.length === 0) return;
             
@@ -761,7 +727,7 @@
                 </div>
             `);
             
-            // Adicionar position relative na seção de arquivos se não tiver
+            // Adicionar position relative na seÃ§Ã£o de arquivos se nÃ£o tiver
             filesSection.css('position', 'relative');
             filesSection.append(overlay);
         }
@@ -780,10 +746,10 @@
             const errorSection = this.container.find('.gdhn-error-section');
             const errorMessage = errorSection.find('.gdhn-error-message');
             
-            errorMessage.html(`❌ ${this.escapeHtml(message)}`);
+            errorMessage.html(`âŒ ${this.escapeHtml(message)}`);
             errorSection.show();
             
-            // Auto-hide após 5 segundos
+            // Auto-hide apÃ³s 5 segundos
             setTimeout(() => {
                 errorSection.hide();
             }, 5000);
@@ -814,7 +780,7 @@
         }
     }
     
-    // Função para inicializar containers
+    // FunÃ§Ã£o para inicializar containers
     function initializeContainers() {
         $('.gdhn-container').each(function() {
             if (!$(this).data('gdhn-initialized')) {
@@ -831,11 +797,10 @@
     
     // Compatibilidade com Elementor
     $(window).on('elementor/frontend/init', function() {
-        console.log('[GDHN] Elementor detectado, inicializando...');
         setTimeout(initializeContainers, 500);
     });
     
-    // Monitorar mudanças no DOM (para page builders)
+    // Monitorar mudanÃ§as no DOM (para page builders)
     if (window.MutationObserver) {
         const observer = new MutationObserver(function(mutations) {
             let shouldInit = false;
@@ -852,7 +817,6 @@
             });
             
             if (shouldInit) {
-                console.log('[GDHN] Novos containers detectados, inicializando...');
                 setTimeout(initializeContainers, 100);
             }
         });
@@ -863,7 +827,7 @@
         });
     }
     
-    // Também inicializar para containers adicionados dinamicamente
+    // TambÃ©m inicializar para containers adicionados dinamicamente
     $(document).on('gdhn:init', '.gdhn-container', function() {
         if (!$(this).data('gdhn-initialized')) {
             new GDriveHierarchyNavigator(this);
@@ -871,7 +835,7 @@
         }
     });
     
-    // Event para forçar reinicialização
+    // Event para forÃ§ar reinicializaÃ§Ã£o
     $(document).on('gdhn:reinit', function() {
         $('.gdhn-container').removeData('gdhn-initialized');
         initializeContainers();
