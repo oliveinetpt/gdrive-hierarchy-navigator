@@ -145,7 +145,8 @@ class GDHN_Plugin_Updater {
      * URL de download do ZIP
      */
     private function get_download_url($version) {
-        return "https://github.com/{$this->github_username}/{$this->github_repo}/archive/refs/tags/v{$version}.zip";
+        // Download do asset anexado à release (não do código fonte)
+        return "https://github.com/{$this->github_username}/{$this->github_repo}/releases/download/v{$version}/gdrive-hierarchy-navigator.zip";
     }
     
     /**
