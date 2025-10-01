@@ -187,8 +187,9 @@ class GDHN_Plugin_Updater {
 
 // Inicializar o updater apenas se estivermos no admin
 if (is_admin()) {
+    $plugin_file = dirname(__FILE__) . '/gdrive-hierarchy-navigator.php';
     new GDHN_Plugin_Updater(
-        __FILE__, 
+        $plugin_file, 
         'oliveinetpt',           // Seu username do GitHub
         'gdrive-hierarchy-navigator', // Nome do repositório
         GDHN_VERSION,          // Versão atual
